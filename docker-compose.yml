@@ -1,0 +1,43 @@
+version: "3.5"
+
+services:
+  
+  app: 
+    build:
+      context: ./
+      dockerfile: Dockerfile-app
+    volumes:
+      - ./:/app
+
+
+  db_default:
+    image: "postgres:13.0"
+    hostname: db_default
+    environment:
+      POSTGRES_PASSWORD: "app"
+      POSTGRES_USER: "app"
+      POSTGRES_DB: "app"
+    ports:
+      - "5432:5432"
+
+  db_djangoq:
+    image: "postgres:13.0"
+    hostname: db_djangoq
+    environment:
+      POSTGRES_PASSWORD: "app"
+      POSTGRES_USER: "app"
+      POSTGRES_DB: "app"
+    ports:
+        - "5433:5432"
+    
+  db_memcached:
+    image: 'bitnami/memcached:latest'
+    ports: 
+      - "11211:11211"
+
+  app_djangoq:
+    build:
+      context: ./
+      dockerfile: Dockerfile-djangoq
+    depends_on: 
+      - db_djangoq
