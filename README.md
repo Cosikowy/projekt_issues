@@ -7,7 +7,6 @@
 
 PROD ``settings.py`` :
 ``EMAIL_BACKEND = 'django_q_email.backends.DjangoQBackend'``
-sentry # https://sentry.io/organizations/akanza/issues/?project=5478154
 
 TODO devops:
 utworzenie kanału fcapp-sentry slack i podpięcie sentry
